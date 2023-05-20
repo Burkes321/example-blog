@@ -5,7 +5,7 @@ const app = express()
 const port = 3000
 
 app.use(cors())
-app.use(express.urlencoded())
+app.use(express.urlencoded({ extended: true }))
 
 const pgp = require('pg-promise')()
 const cn = {

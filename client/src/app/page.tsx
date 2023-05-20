@@ -22,6 +22,8 @@ export default function Home() {
     fetchData();
   }, []);
 
+  const handleSubmit = (e) => {};
+
   return (
     <main className={styles.main}>
       <h1>this is the home page</h1>
@@ -31,6 +33,8 @@ export default function Home() {
       <form action="http://localhost:3000/post-form-data" method="post">
         <label htmlFor="title">Title</label>
         <input type="text" id="title" name="title" />
+        <label htmlFor="author">Author</label>
+        <input type="text" id="author" name="author" />
         <button type="submit">SEND!</button>
       </form>
 
