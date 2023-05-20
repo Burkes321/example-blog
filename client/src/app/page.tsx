@@ -1,95 +1,48 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+'use client';
+
+import Image from 'next/image';
+import styles from './page.module.css';
+import { useState, useEffect } from 'react';
 
 export default function Home() {
+  const [data, setData] = useState(null);
+  const [formData, setFormData] = useState({
+    title: '',
+  });
+
+  const fetchData = async () => {
+    const response = await fetch('http://localhost:3000/test-route');
+
+    const json = await response.json();
+
+    console.log(json.message);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+      <h1>this is the home page</h1>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+      <h2>use this form to post some data to the express server</h2>
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
+      <form action="http://localhost:3000/post-form-data" method="post">
+        <label htmlFor="title">Title</label>
+        <input type="text" id="title" name="title" />
+        <button type="submit">SEND!</button>
+      </form>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
+      {/* <form action="http://localhost:3000/post-form-data" method="post">
+        <label htmlFor="first">First Name</label>
+        <input type="text" id="first" name="first" />
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
+        <label htmlFor="last">Last Name</label>
+        <input type="text" id="last" name="last" />
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+        <button type="submit">Submit</button>
+      </form> */}
     </main>
-  )
+  );
 }
