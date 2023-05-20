@@ -4,6 +4,8 @@ const cors = require('cors')
 const app = express()
 const port = 3000
 
+
+// TODO: will be nice to clean this up and split it into modules
 app.use(cors())
 app.use(express.urlencoded({ extended: true }))
 
@@ -36,7 +38,10 @@ app.get('/post-form-data', (req, res) => {
 })
 
 app.post('/post-form-data', (req, res) => {
-  console.log(req.body)
+  const title = req.body.title
+  const author = req.body.author
+
+  db.query('INSERT INTO article (title, author) VALUES ($1, $2) RETURNING *', [title, author])
 
   res.send('received post!')
 })

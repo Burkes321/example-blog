@@ -22,7 +22,9 @@ export default function Home() {
     fetchData();
   }, []);
 
-  const handleSubmit = (e) => {};
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
 
   return (
     <main className={styles.main}>
@@ -37,16 +39,6 @@ export default function Home() {
         <input type="text" id="author" name="author" />
         <button type="submit">SEND!</button>
       </form>
-
-      {/* <form action="http://localhost:3000/post-form-data" method="post">
-        <label htmlFor="first">First Name</label>
-        <input type="text" id="first" name="first" />
-
-        <label htmlFor="last">Last Name</label>
-        <input type="text" id="last" name="last" />
-
-        <button type="submit">Submit</button>
-      </form> */}
     </main>
   );
 }
