@@ -1,6 +1,7 @@
-
+// TODO: experiment with converting this into modules
 const express = require('express')
 const cors = require('cors')
+const jwt = require('jsonwebtoken')
 const app = express()
 const port = 3000
 
@@ -38,10 +39,21 @@ app.get('/post-form-data', (req, res) => {
 })
 
 app.post('/post-form-data', (req, res) => {
-  const title = req.body.title
-  const author = req.body.author
+  const { title, author } = req.body
 
   db.query('INSERT INTO article (title, author) VALUES ($1, $2) RETURNING *', [title, author])
 
   res.send('received post!')
+})
+
+app.get('/login', (req, res) => {
+  res.send('login route')
+})
+
+app.post('/login', (req, res) => {
+  // in this route we are going to have a form which submits an email and password
+
+  // we check the DB to make sure the user exists and then provide a JWT to the user to 
+
+  // keep them logged in (authenticated)
 })

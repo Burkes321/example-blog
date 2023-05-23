@@ -22,10 +22,6 @@ export default function Home() {
     fetchData();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-  };
-
   return (
     <main className={styles.main}>
       <h1>this is the home page</h1>
